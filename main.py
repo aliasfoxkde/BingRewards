@@ -38,11 +38,16 @@ SCRIPT_DATE = "November 1, 2017"
 
 # Added 02/11/2018: workaround to run on mobile devices
 # This method needs improvement and testing, but this works for now
-# Interfaces: wlan0, lo, dummy0, r_rmnet_data0, rmnet_data0, rmnet_data6, rmnet_data7,
 import ssl
 import socket
-s = socket.socket()
-s.bind(('66.249.84.24', 0))
+
+# Binds socket to the Mobile SIM network
+# Goal: to allow a passthrough argument to change 
+# the device tied to, default to mobile, then WiFi
+#s = socket.socket()
+#s.bind(('66.249.84.24', 0))
+
+# Bypasses ssl security for mobile devices (needs improvements)
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
