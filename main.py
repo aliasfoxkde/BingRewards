@@ -36,6 +36,16 @@ totalPoints = 0
 SCRIPT_VERSION = "3.16.1"
 SCRIPT_DATE = "November 1, 2017"
 
+# Added 02/11/2018: workaround to run on mobile devices
+# This method needs improvement and testing, but this works for now
+# Interfaces: wlan0, lo, dummy0, r_rmnet_data0, rmnet_data0, rmnet_data6, rmnet_data7,
+import ssl
+import socket
+s = socket.socket()
+s.bind(('66.249.84.24', 0))
+ssl._create_default_https_context = ssl._create_unverified_context
+
+
 def earnRewards(config, httpHeaders, userAgents, reportItem, password):
     """Earns Bing reward points and populates reportItem"""
     noException = False
